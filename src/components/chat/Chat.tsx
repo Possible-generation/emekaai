@@ -1,4 +1,4 @@
-import { BsStars } from "react-icons/bs";
+// import { BsStars } from "react-icons/bs";
 import type { Messages } from "../../entities";
 import { sign } from "../../utils/assets";
 import MarkdownPreview from "@uiw/react-markdown-preview";

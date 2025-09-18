@@ -188,7 +188,7 @@
 
 import { logo } from "../../utils/assets";
 import { CiSearch } from "react-icons/ci";
-import { BsPlus, BsStars } from "react-icons/bs";
+import { BsStars } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
 import { history } from "../../utils";
 import { FaRegCommentDots } from "react-icons/fa";
@@ -221,7 +221,7 @@ export default function Sidebar({
   openAside,
   setOpenAside,
   conversations,
-  formatTimestamp,
+  // formatTimestamp,
   fetchConversation,
   initiateLogout,
   initiateNewChat,

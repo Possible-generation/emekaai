@@ -460,7 +460,7 @@ import {
   slide3,
   image10,
 } from "../utils/assets";
-import { FaUserLarge, FaCircleStop } from "react-icons/fa6";
+import { FaUserLarge } from "react-icons/fa6";
 
 import { useKeenSlider } from "keen-slider/react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
@@ -531,7 +531,7 @@ export default function Home() {
   const navigate = useNavigate();
 
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [activeArrow, setActiveArrow] = useState(null);
+  const [activeArrow, setActiveArrow] = useState<"left" | "right">("left");
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: { perView: 1, spacing: 15 },
     loop: true,

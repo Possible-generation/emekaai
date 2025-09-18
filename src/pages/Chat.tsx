@@ -1132,6 +1132,7 @@
 //   );
 // }
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useAppContext } from "../context";
 import { IoMdAttach } from "react-icons/io";
@@ -1202,7 +1203,7 @@ export default function Chat() {
   const [userMsg, setUserMsg] = useState<string>("");
   const [error, setError] = useState<boolean>(false);
   const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [chatTitle, setChatTitle] = useState<string>("New Chat");
+  const [_chatTitle, setChatTitle] = useState<string>("New Chat");
   const [image, setImage] = useState<ImageHandler>();
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
