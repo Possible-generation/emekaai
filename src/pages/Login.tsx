@@ -1,0 +1,407 @@
+// import { useAppContext } from "../context";
+// import { useNavigate } from "react-router-dom";
+// import { logo, image5, bottomImage } from "../utils/assets";
+// import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+// import { useState, useEffect } from "react";
+// import type { LoginForm } from "../entities";
+// import Loader from "../components/loader";
+// import { login } from "../api/onboarding";
+// import { toast } from "sonner";
+
+// export default function Login() {
+//   const { theme, setAccessToken, setUser, user } = useAppContext();
+//   const navigate = useNavigate();
+
+//   const [loginForm, setLoginForm] = useState<LoginForm>({
+//     email: "",
+//     password: "",
+//   });
+//   const [hasSignedIn, setHasSignedIn] = useState<boolean>(false);
+//   const [loading, setLoading] = useState<boolean>(false);
+//   const [showPassword, setShowPassword] = useState<boolean>(false);
+
+//   const handleChange = (
+//     e: React.ChangeEvent<
+//       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+//     >
+//   ) => {
+//     const { name, value } = e.target;
+//     setLoginForm((prevState) => {
+//       return {
+//         ...prevState,
+//         [name]: value,
+//       };
+//     });
+//   };
+
+//   const signInUser = async () => {
+//     setLoading(true);
+//     login(loginForm.email, loginForm.password)
+//       .then((resp) => {
+//         //authenticate user
+//         setAccessToken(resp.data.token ? resp.data.token : undefined);
+//         // update user
+//         if (resp.data.user) setUser(resp.data.user);
+//         toast.success(resp.message ? resp.message : "Login successful");
+//         setLoading(false);
+//         //to navigate to chat page
+//         setHasSignedIn(true);
+//       })
+//       .catch((error) => {
+//         setLoading(false);
+//         // console.log(error);
+//         toast.error(
+//           error.response.data.message
+//             ? error.response.data.message
+//             : "Login failed"
+//         );
+//       });
+//   };
+
+//   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
+//     if (loginForm.email && loginForm.password) {
+//       signInUser();
+//     }
+//   };
+
+//   useEffect(() => {
+//     if (hasSignedIn && user?.id)
+//       navigate(`/c/user${user?.id}`, { replace: true });
+//     // eslint-disable-next-line react-hooks/exhaustive-deps
+//   }, [hasSignedIn]);
+
+//   return (
+//     <main
+//       className={`h-screen transition ease-in-out delay-100 ${
+//         theme === "dark" ? "bg-[#1A1D18]" : "bg-white"
+//       }`}
+//     >
+//       <div className="relative flex flex-col w-full h-full">
+//         {/* white cartoon */}
+//         <div className="absolute left-0 top-28">
+//           <img
+//             src={image5}
+//             draggable={false}
+//             alt="img"
+//             className="w-[100px] h-auto md:w-[250px] lg:w-[350px]"
+//             loading="lazy"
+//             decoding="async"
+//           />
+//         </div>
+//         {/* form */}
+//         <div className="h-full flex flex-col justify-between py-10 items-center">
+//           <div className="flex flex-col gap-y-0.5 items-center">
+//             <img
+//               src={logo}
+//               draggable={false}
+//               alt="logo"
+//               className="w-[80px] h-auto lg:w-[130px]"
+//               loading="lazy"
+//               decoding="async"
+//             />
+//             <button
+//               onClick={() => navigate("/")}
+//               className={`uppercase text-lg transition ease-in-out delay-100 cursor-pointer font-bold lg:text-xl ${
+//                 theme === "dark" ? "text-white" : "text-[#15411F]"
+//               }`}
+//             >
+//               CHIDI
+//             </button>
+//           </div>
+//           <form
+//             onSubmit={handleSubmit}
+//             className="z-10 flex flex-col gap-y-5 w-full text-center p-6 md:max-w-[461px]"
+//           >
+//             <h2
+//               className={`text-lg transition ease-in-out delay-100 font-semibold ${
+//                 theme === "dark" ? "text-white" : "text-[#333333]"
+//               }`}
+//             >
+//               Login to use Chidi
+//             </h2>
+//             <div className="relative flex flex-col gap-y-5">
+//               {/* email */}
+//               <input
+//                 className={`border border-[#B9B9B9] h-[50px] px-3 w-full rounded-lg focus:outline-none transition ease-in-out delay-100 lg:px-5 lg:h-[64px] ${
+//                   theme === "dark"
+//                     ? "placeholder:text-[#B9B9B9] text-[#B9B9B9]"
+//                     : "placeholder:text-[#5C5C5C] text-[#333333]"
+//                 }`}
+//                 type="email"
+//                 name="email"
+//                 onChange={handleChange}
+//                 placeholder="Email"
+//               />
+//               {/* password */}
+//               <input
+//                 className={`border border-[#B9B9B9] h-[50px] px-3 w-full rounded-lg focus:outline-none transition ease-in-out delay-100 lg:px-5 lg:h-[64px] ${
+//                   theme === "dark"
+//                     ? "placeholder:text-[#B9B9B9] text-[#B9B9B9]"
+//                     : "placeholder:text-[#5C5C5C] text-[#333333]"
+//                 }`}
+//                 type={showPassword ? "text" : "password"}
+//                 name="password"
+//                 onChange={handleChange}
+//                 placeholder="Password"
+//               />
+//               {/* eye icon */}
+//               <i
+//                 onClick={() => setShowPassword(!showPassword)}
+//                 className={`absolute bottom-3.5 right-3 transition ease-in-out delay-100 cursor-pointer xl:bottom-5 ${
+//                   theme === "dark" ? "text-white" : "text-[#333333]"
+//                 }`}
+//               >
+//                 {showPassword ? (
+//                   <AiFillEye size={20} />
+//                 ) : (
+//                   <AiFillEyeInvisible size={20} />
+//                 )}
+//               </i>
+//             </div>
+//             {/* <div className="text-end">
+//               <p
+//                 className={`text-sm transition ease-in-out delay-100 font-semibold cursor-not-allowed ${
+//                   theme === "dark" ? "text-white" : "text-[#2B2B2B]"
+//                 }`}
+//               >
+//                 Forgot password?
+//               </p>
+//             </div> */}
+//             <button
+//               disabled={loading || !loginForm.email || !loginForm.password}
+//               className="bg-[#15411F] rounded-lg h-[50px] text-white font-semibold w-full cursor-pointer flex flex-row items-center gap-x-2 justify-center disabled:bg-[#5c5c5c] disabled:cursor-not-allowed lg:h-[64px]"
+//             >
+//               {loading && <Loader size={20} color="white" />}
+//               <p>{loading ? "Logging in..." : "Continue"}</p>
+//             </button>
+//             {/* <div className="text-center">
+//               <p
+//                 className={`text-sm transition ease-in-out delay-100 font-semibold cursor-not-allowed lg:text-base ${
+//                   theme === "dark" ? "text-white" : "text-[#2B2B2B]"
+//                 }`}
+//               >
+//                 Don't have an account yet?{" "}
+//                 <Link
+//                   className={` hover:underline ${
+//                     theme === "dark" ? "text-white" : "text-[#15411F]"
+//                   }`}
+//                   to={"/signup"}
+//                 >
+//                   Sign up here
+//                 </Link>
+//               </p>
+//             </div> */}
+//           </form>
+//           <p
+//             className={`text-sm text-center font-medium ${
+//               theme === "dark" ? "text-white" : "text-[#2A2A2A]"
+//             }`}
+//           >
+//             Copyright © 2025. All Rights Reserved.
+//           </p>
+//         </div>
+//         {/* colorful dots */}
+//         <div className="absolute right-0 bottom-0">
+//           <img
+//             src={bottomImage}
+//             draggable={false}
+//             alt="img"
+//             className="w-[200px] h-auto md:w-[350px] lg:w-[500px]"
+//             loading="lazy"
+//             decoding="async"
+//           />
+//         </div>
+//       </div>
+//     </main>
+//   );
+// }
+
+import { useAppContext } from "../context";
+import { useNavigate } from "react-router-dom";
+import { logo, image5, emeka, bgline, bottomImage } from "../utils/assets";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+import { useState, useEffect } from "react";
+import type { LoginForm } from "../entities";
+import Loader from "../components/loader";
+import { login } from "../api/onboarding";
+import { toast } from "sonner";
+
+export default function Login() {
+  const { setAccessToken, setUser, user } = useAppContext();
+  const navigate = useNavigate();
+
+  const [loginForm, setLoginForm] = useState<LoginForm>({
+    email: "",
+    password: "",
+  });
+  const [hasSignedIn, setHasSignedIn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setLoginForm((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const signInUser = async () => {
+    setLoading(true);
+    login(loginForm.email, loginForm.password)
+      .then((resp) => {
+        setAccessToken(resp.data.token ? resp.data.token : undefined);
+        if (resp.data.user) setUser(resp.data.user);
+        toast.success(resp.message ? resp.message : "Login successful");
+        setLoading(false);
+        setHasSignedIn(true);
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(
+          error.response?.data?.message
+            ? error.response.data.message
+            : "Login failed"
+        );
+      });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (loginForm.email && loginForm.password) {
+      signInUser();
+    }
+  };
+
+  useEffect(() => {
+    if (hasSignedIn && user?.id)
+      navigate(`/c/user${user?.id}`, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hasSignedIn]);
+
+  return (
+    <main className="h-screen relative bg-white transition ease-in-out delay-100">
+      <div className="relative flex flex-col w-full h-full">
+        {/* left cartoon */}
+        <div className="absolute  z-10 left-0  top-28">
+          <img
+            src={image5}
+            draggable={false}
+            alt="img"
+            className="w-[100px]  h-auto md:w-[250px] lg:w-[350px]"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        {/* form */}
+        <div className="h-full flex flex-col justify-between py-10 items-center">
+          <div className="flex flex-col z-10  gap-y-0.5 items-center">
+            <img
+              src={logo}
+              draggable={false}
+              alt="logo"
+              className="w-[80px] h-auto lg:w-[130px]"
+              loading="lazy"
+              decoding="async"
+            />
+            {/* <button
+              onClick={() => navigate("/")}
+              className="uppercase text-lg font-bold cursor-pointer text-[#15411F] lg:text-xl transition ease-in-out delay-100"
+            >
+              CHIDI
+            </button> */}
+          </div>
+
+          <form
+            onSubmit={handleSubmit}
+            className="z-10 flex flex-col gap-y-5 w-full text-center p-6 md:max-w-[461px]"
+          >
+            <div className="flex flex-row items-center  justify-center gap-x-1">
+              <h2 className="text-lg flex font-semibold text-[#333333] transition ease-in-out delay-100">
+                Login to use{" "}
+              </h2>
+              <img
+                src={emeka}
+                alt=""
+                className="w-18"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div className="relative flex flex-col gap-y-5">
+              {/* email */}
+              <input
+                className="border border-[#B9B9B9] h-[50px] px-3 w-full rounded-lg focus:outline-none placeholder:text-[#5C5C5C] text-[#333333] transition ease-in-out delay-100 lg:px-5 lg:h-[64px]"
+                type="email"
+                name="email"
+                onChange={handleChange}
+                placeholder="Email"
+              />
+
+              {/* password */}
+              <input
+                className="border border-[#B9B9B9] h-[50px] px-3 w-full rounded-lg focus:outline-none placeholder:text-[#5C5C5C] text-[#333333] transition ease-in-out delay-100 lg:px-5 lg:h-[64px]"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                onChange={handleChange}
+                placeholder="Password"
+              />
+
+              {/* eye icon */}
+              <i
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute bottom-3.5 right-3 cursor-pointer text-[#333333] transition ease-in-out delay-100 xl:bottom-5"
+              >
+                {showPassword ? (
+                  <AiFillEye size={20} />
+                ) : (
+                  <AiFillEyeInvisible size={20} />
+                )}
+              </i>
+            </div>
+
+            <button
+              disabled={loading || !loginForm.email || !loginForm.password}
+              className="bg-[#15411F] rounded-lg h-[50px] text-white font-semibold w-full flex items-center justify-center gap-x-2 cursor-pointer disabled:bg-[#5c5c5c] disabled:cursor-not-allowed lg:h-[64px]"
+            >
+              {loading && <Loader size={20} color="white" />}
+              <p>{loading ? "Logging in..." : "Continue"}</p>
+            </button>
+          </form>
+
+          <p className="text-sm text-center font-medium text-[#2A2A2A]">
+            Copyright © 2025. All Rights Reserved.
+          </p>
+        </div>
+
+        <img
+          src={bgline}
+          draggable={false}
+          alt="icon"
+          className="absolute inset-0 z-0"
+          loading="lazy"
+          decoding="async"
+        />
+
+        {/* bottom right dots */}
+        <div className="absolute right-0 bottom-0">
+          <img
+            src={bottomImage}
+            draggable={false}
+            alt="img"
+            className="w-[200px] h-auto md:w-[350px] lg:w-[500px]"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </main>
+  );
+}

@@ -1,0 +1,126 @@
+import { BsStars } from "react-icons/bs";
+import type { Messages } from "../../entities";
+import { sign } from "../../utils/assets";
+import MarkdownPreview from "@uiw/react-markdown-preview";
+import Loader from "../loader";
+
+interface ChatBoxProps {
+  messages: Messages[];
+  theme: "dark" | "light";
+  bottomRef: React.RefObject<HTMLDivElement | null>;
+  isTyping: boolean;
+}
+
+export default function ChatBox({
+  theme,
+  messages,
+  bottomRef,
+  isTyping,
+}: ChatBoxProps) {
+  return (
+    <div className="flex-1 w-full space-y-2 overflow-y-auto max-h-[79vh] activity px-5 pb-8 sm:max-h-[74vh] lg:px-6 lg:pt-5 lg:pb-5 lg:max-h-[72vh] lg:space-y-5">
+      {messages.map((msg, idx) => (
+        <div
+          key={idx}
+          className={`flex text-sm lg:text-base ${
+            msg.sender === "user" ? "justify-end" : "justify-start"
+          }`}
+        >
+          <div
+            className={`p-3 rounded-lg max-w-full lg:max-w-[80%] ${
+              msg.sender === "user"
+                ? `${
+                    theme === "dark"
+                      ? "bg-[#303A2D80] text-white"
+                      : "bg-[#D7E8D380] text-[#333333]"
+                  }`
+                : `${theme === "dark" ? "text-white" : "text-[#333333]"}`
+            }`}
+          >
+            <div
+              className={
+                msg.sender === "ai"
+                  ? "flex flex-col gap-y-3 w-full mb-3"
+                  : "hidden"
+              }
+            >
+              <div className="flex flex-row gap-x-2 items-center">
+                <img
+                  src={sign}
+                  alt="img"
+                  loading="lazy"
+                  decoding="async"
+                  draggable={false}
+                  className="w-[20px] h-[20px]  lg:w-[30px] lg:h-[30px]"
+                />
+              </div>
+              <hr className="border-none h-[0.2px] bg-[#b9b9b957]" />
+            </div>
+            {/* server image handling */}
+            {msg.media_url && msg.media_url?.includes("image") && (
+              <img
+                src={msg.media_url}
+                alt="img"
+                draggable={false}
+                className="w-[300px] mb-2 rounded-lg md:w-[250px] lg:w-[300px]"
+                loading="lazy"
+                decoding="async"
+              />
+            )}
+            {/* client image handling */}
+            {msg.media_url &&
+              msg.media_url?.includes("Processing") &&
+              msg.media_type === "image" && (
+                <div className="italic">
+                  <MarkdownPreview
+                    style={{ backgroundColor: "transparent", color: "inherit" }}
+                    source={msg.media_url}
+                  />
+                </div>
+              )}
+            {/* client audio handling */}
+            {msg.media_url &&
+              msg.media_url?.includes("Processing") &&
+              msg.media_type === "audio" && (
+                <div className="italic">
+                  <MarkdownPreview
+                    style={{ backgroundColor: "transparent", color: "inherit" }}
+                    source={msg.media_url}
+                  />
+                </div>
+              )}
+            {/* server audio handling */}
+            {msg.media_url && msg.media_url?.includes(".webm") && (
+              <audio onContextMenu={(e) => e.preventDefault()} controls>
+                <source src={msg.media_url} type="audio/wav" />
+              </audio>
+            )}
+            <MarkdownPreview
+              style={{ backgroundColor: "transparent", color: "inherit" }}
+              source={msg.media_url?.includes(".webm") ? "" : msg.content}
+              // source={
+              //   msg.media_url?.includes(".webm")
+              //     ? ""
+              //     : msg.media_url?.includes("image")
+              //     ? ""
+              //     : msg.content
+              // }
+              // source={msg.content}
+            />
+          </div>
+        </div>
+      ))}
+      {isTyping && (
+        <div className="flex justify-start w-full text-xs md:text-sm">
+          <div className="flex gap-x-2 items-center">
+            <Loader color={theme === "dark" ? "white" : "#15411F"} size={15} />
+            <p className={`${theme === "dark" ? "white" : "#15411F"}`}>
+              Emeka is typing...
+            </p>
+          </div>
+        </div>
+      )}
+      <div ref={bottomRef} />
+    </div>
+  );
+}
