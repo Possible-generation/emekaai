@@ -555,9 +555,9 @@ export default function Home() {
         <nav className="flex items-center justify-between w-full px-1 lg:max-w-[1440px] lg:px-10">
           <div className="flex flex-row items-center gap-x-1 text-sm lg:text-base">
             <img
-              src={emekalogo}
+              src={emeka}
               alt="logo"
-              className="w-auto h-[47px] lg:h-[60px]"
+              className="w-auto h-[30px] lg:h-[50px]"
               draggable={false}
               loading="lazy"
               decoding="async"
@@ -758,7 +758,7 @@ export default function Home() {
       {/* footer */}
       <footer>
         <div className="transition ease-in-out delay-100 relative bg-inherit">
-          <div className="flex flex-col gap-y-3 items-center text-center p-6 md:absolute md:left-3 md:top-3 md:z-10 md:w-[466px] md:items-start md:text-start lg:w-[566px] lg:left-20 lg:top-60 text-black lg:text-white">
+          <div className="flex flex-col gap-y-3 items-center text-center p-6 md:absolute md:left-3 md:top-3 md:z-10 md:w-[466px] md:items-start md:text-start lg:w-[566px] lg:left-20 lg:top-60 text-black md:text-white">
             <h4 className="text-xl font-semibold lg:text-4xl">
               Built to guide every leader
             </h4>
