@@ -186,7 +186,6 @@
 //   );
 // }
 
-import { emeka } from "../../utils/assets";
 import { CiSearch } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
@@ -194,7 +193,6 @@ import { history } from "../../utils";
 import { FaRegCommentDots } from "react-icons/fa";
 import type { ConversationsController } from "../../pages/Chat";
 import Loader from "../loader";
-import { Link } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
 import type { UserConversations } from "../../entities";
 
