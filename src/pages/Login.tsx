@@ -303,10 +303,10 @@ export default function Login() {
         <div className="h-full flex flex-col justify-between py-10 items-center">
           <div className="flex flex-col z-10  gap-y-0.5 items-center">
             <img
-              src={logo}
+              src={emeka}
               draggable={false}
               alt="logo"
-              className="w-[80px] h-auto lg:w-[130px]"
+              className="w-[80px] h-auto lg:w-[200px]"
               loading="lazy"
               decoding="async"
             />

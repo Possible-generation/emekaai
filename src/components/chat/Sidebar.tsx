@@ -186,7 +186,7 @@
 //   );
 // }
 
-import { logo } from "../../utils/assets";
+import { emeka } from "../../utils/assets";
 import { CiSearch } from "react-icons/ci";
 import { BsStars } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
@@ -239,18 +239,17 @@ export default function Sidebar({
     >
       <div className="w-full h-full flex flex-col gap-y-5 relative">
         {/* logo */}
-        <Link
+        {/* <Link
           to={"/"}
-          className="flex flex-row items-center justify-center gap-x-1 text-sm lg:text-base"
+          className="flex flex-row items-center justify-center bg-white blur-50 opacity-100 rounded gap-x-1 text-sm lg:text-base"
         >
           <img
-            src={logo}
+            src={emeka}
             alt="logo"
             className="w-auto h-[47px] lg:h-[70px]"
             draggable={false}
           />
-          <p className="uppercase font-bold text-[#15411F]">CHIDI</p>
-        </Link>
+        </Link> */}
 
         {/* add new query */}
         <button
