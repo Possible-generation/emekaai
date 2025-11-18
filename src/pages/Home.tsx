@@ -450,7 +450,6 @@
 
 import { BsArrowRight } from "react-icons/bs";
 import {
-  emekalogo,
   logoCircle,
   emeka,
   bgline,

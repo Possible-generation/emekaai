@@ -219,7 +219,7 @@
 
 import { useAppContext } from "../context";
 import { useNavigate } from "react-router-dom";
-import { logo, image5, emeka, bgline, bottomImage } from "../utils/assets";
+import { image5, emeka, bgline, bottomImage } from "../utils/assets";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import type { LoginForm } from "../entities";
