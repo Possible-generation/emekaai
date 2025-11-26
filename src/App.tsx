@@ -5,6 +5,8 @@ import SignUp from "./pages/SignUp";
 import ErrorPage from "./pages/ErrorPage";
 import Login from "./pages/Login";
 import Chat from "./pages/Chat";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/adminlogin";
 import Auth from "./components/Auth";
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         {/* Protected routes end */}
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </Router>

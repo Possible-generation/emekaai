@@ -217,6 +217,7 @@
 //   );
 // }
 
+import { Link } from "react-router-dom";
 import { useAppContext } from "../context";
 import { useNavigate } from "react-router-dom";
 import { image5, emeka, bgline, bottomImage } from "../utils/assets";
@@ -256,7 +257,13 @@ export default function Login() {
     login(loginForm.email, loginForm.password)
       .then((resp) => {
         setAccessToken(resp.data.token ? resp.data.token : undefined);
+        // set the token to local storage
+        // if (resp.data.token) {
+        //   localStorage.setItem("accessToken", resp.data.token);
+        // }
         if (resp.data.user) setUser(resp.data.user);
+        //save setuser to local storage
+        // localStorage.setItem("user", JSON.stringify(resp.data.user));
         toast.success(resp.message ? resp.message : "Login successful");
         setLoading(false);
         setHasSignedIn(true);
@@ -301,7 +308,10 @@ export default function Login() {
 
         {/* form */}
         <div className="h-full flex flex-col justify-between py-10 items-center">
-          <div className="flex flex-col z-10  gap-y-0.5 items-center">
+          <div
+            onClick={() => navigate("/")}
+            className="flex flex-col z-10  gap-y-0.5 items-center"
+          >
             <img
               src={emeka}
               draggable={false}
@@ -374,6 +384,17 @@ export default function Login() {
               {loading && <Loader size={20} color="white" />}
               <p>{loading ? "Logging in..." : "Continue"}</p>
             </button>
+            <div className="text-center gap-2">
+              <p className="text-sm transition ease-in-out delay-100 text-[#2B2B2B] font-semibold lg:text-base ">
+                Don't have an account?
+                <Link
+                  className="hover:underline text-[#15411F] "
+                  to={"/signup"}
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </form>
 
           <p className="text-sm text-center font-medium text-[#2A2A2A]">

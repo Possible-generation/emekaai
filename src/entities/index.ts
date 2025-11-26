@@ -14,13 +14,39 @@ export interface ChatHistory {
   timestamp: string;
 }
 
+// export interface SignupForm {
+//   firstname: string;
+//   lastname: string;
+//   email: string;
+//   role: string;
+//   position: string;
+//   about: string | null;
+//   password: string;
+//   password_confirmation: string;
+//   letter: string | null;
+//   memo: string | null;
+// }
+
+// export interface SignupForm {
+//   firstname: string;
+//   lastname: string;
+//   email: string;
+//   role: string;
+//   position: string;
+//   about: string;
+//   password: string;
+//   password_confirmation: string;
+// }
+
 export interface SignupForm {
   firstname: string;
   lastname: string;
   email: string;
   role: string;
+  position: string;
   password: string;
   password_confirmation: string;
+  about: string;
 }
 
 export interface LoginForm {
