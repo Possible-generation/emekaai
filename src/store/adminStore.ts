@@ -25,7 +25,7 @@ export const useAdminStore = create<AdminState>((set) => ({
   admin: null,
   users: [],
   isAuthenticated: false,
-  login: (email, password) => {
+  login: (email) => {
     // Mock login - replace with actual API call
     set({
       admin: { username: "Admin User", email },
