@@ -4414,7 +4414,7 @@ export default function Chat() {
                 {/* Popup menu */}
                 {showModelPopup && (
                   <div className="absolute bottom-full left-0 mb-2 bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden z-50 w-40">
-                    {/* <button
+                    <button
                       type="button"
                       onClick={() => handleModelSelect("general")}
                       className={`w-full px-4 py-3 text-left hover:bg-gray-100 flex items-center gap-x-2 text-sm transition-colors ${
@@ -4423,7 +4423,7 @@ export default function Chat() {
                     >
                       <BiMessageSquareDetail size={18} />
                       <span>General</span>
-                    </button> */}
+                    </button>
                     <button
                       type="button"
                       onClick={() => handleModelSelect("letter")}
