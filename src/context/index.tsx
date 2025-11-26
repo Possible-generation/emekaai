@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 // src/context/MyContext.tsx
+
 import {
   createContext,
   useContext,
@@ -55,8 +56,37 @@ export const ContextProvider = ({ children }: { children: ReactNode }) => {
   const [theme, setTheme] = useState<"dark" | "light">(
     window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
   );
-  const [accessToken, setAccessToken] = useState<string>();
-  const [user, setUser] = useState<User>();
+  // const [accessToken, setAccessToken] = useState<string>(); // check the local storage if there is access token in local storage use it, if nothing leave it as empty
+  // const [accessToken, setAccessToken] = useState<string>(() => {
+  //   return localStorage.getItem("accessToken") || "";
+  // });
+
+  // neew edit
+  const [accessToken, setAccessToken] = useState<string | undefined>(
+    () => localStorage.getItem("accessToken") || undefined
+  );
+  useEffect(() => {
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+    } else {
+      localStorage.removeItem("accessToken");
+    }
+  }, [accessToken]);
+
+  const [user, setUser] = useState<User | undefined>(() => {
+    const stored = localStorage.getItem("user");
+    return stored ? JSON.parse(stored) : undefined;
+  });
+  // Persist user to localStorage whenever it changes
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user");
+    }
+  }, [user]);
+
+  // const [user, setUser] = useState<User>();
   const [thread, setThread] = useState<Messages[]>([]);
 
   //format time

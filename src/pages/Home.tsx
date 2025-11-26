@@ -572,18 +572,19 @@ export default function Home() {
               <p>Sign in</p>
               <BsArrowRight className="font-semibold" />
             </button>
+            {/* <button
+              onClick={() => navigate("/signup")}
+              className={`flex-row items-center gap-x-1 text-white px-3 py-2 rounded-lg bg-[#1D5228] cursor-pointer lg:px-4 ${
+                user ? "hidden" : "flex"
+              }`}
+            >
+              <p>Sign up</p>
+              <BsArrowRight className="font-semibold" />
+            </button> */}
             <Link
               className={`${user ? "block" : "hidden"} text-[#1b1b1b]`}
               to={`/c/user${user?.id}`}
             >
-              {/* <img
-                src={chidi}
-                alt="img"
-                draggable={false}
-                decoding="async"
-                loading="lazy"
-                className="w-[35px] h-[35px] rounded-full lg:w-[40px] lg:h-[40px]"
-              /> */}
               <div
                 draggable={false}
                 className="min-w-[30px] max-w-[30px] h-[30px] rounded-full flex items-center justify-center text-white bg-[#1A1D18]"
