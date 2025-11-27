@@ -1812,7 +1812,7 @@ export default function SignUp() {
               className="border border-[#B9B9B9] h-[50px] px-3 w-full rounded-lg placeholder:text-[#5C5C5C] text-[#333333] focus:outline-none transition ease-in-out delay-100 lg:px-5 lg:h-[64px]"
               type="text"
               name="role"
-              placeholder="Role (e.g., Staff, Admin)"
+              placeholder="Role"
               onChange={handleChange}
               value={signUpForm.role}
             />
@@ -1868,7 +1868,7 @@ export default function SignUp() {
                 type="file"
                 multiple
                 onChange={handleLetterFileChange}
-                accept=".pdf,.doc,.docx,.txt, image/png, image/jpg, image/jpeg"
+                accept=".pdf,.txt, "
                 className="h-[50px] px-3 w-full rounded-lg text-[#333333] focus:outline-none transition ease-in-out delay-100 lg:px-5 lg:h-[64px] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#15411F] file:text-white hover:file:bg-[#1a5228] file:cursor-pointer"
               />
               {/* Display selected letter files */}
@@ -1904,7 +1904,7 @@ export default function SignUp() {
                 type="file"
                 multiple
                 onChange={handleMemoFileChange}
-                accept=".pdf,.doc,.docx,.txt, image/png, image/jpg, image/jpeg"
+                accept=".pdf,.txt"
                 className="h-[50px] px-3 w-full rounded-lg text-[#333333] focus:outline-none transition ease-in-out delay-100 lg:px-5 lg:h-[64px] file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#15411F] file:text-white hover:file:bg-[#1a5228] file:cursor-pointer"
               />
               {/* Display selected memo files */}
